@@ -18,9 +18,9 @@ public class BankTransferPayment extends Payment {
 
     @Override
     public Map<String, String> processPayment(Map<String, String> paymentDetails) {
-        System.out.println("Connecting to Bank Transfer API at " + config.get("bank_transfer_endpoint"));
+        System.out.println("Connecting to Bank Transfer API at " + this.config.get("bank_transfer_endpoint"));
         String transactionId = "BT" + new Date().getTime();
-        System.out.println("Processing bank transfer payment for " + customerInfo.get("name"));
+        System.out.println("Processing bank transfer payment for " + this.customerInfo.get("name"));
         return Map.of("status", "success", "transaction_id", transactionId);
     }
 }
