@@ -7,7 +7,7 @@ public abstract class Payment {
     protected Map<String, String> customerInfo;
      protected Map<String, String> paymentDetails;
     
-    public Payment(double amount, String currency, Map<String, String> customerInfo) {
+    public Payment(double amount, String currency, Map<String, String> customerInfo, Map<String, String> paymentDetails) {
         this.amount = amount;
         this.currency = currency;
         this.customerInfo = customerInfo;
@@ -15,7 +15,7 @@ public abstract class Payment {
         this.transactionTime = System.currentTimeMillis();
     }
 
-    public abstract boolean validatePayment(Map<String, String> paymentDetails);
+    public abstract boolean validatePayment();
 
-    public abstract Map<String, String> processPayment(Map<String, String> paymentDetails);
+    public abstract Map<String, String> processPayment();
 }
