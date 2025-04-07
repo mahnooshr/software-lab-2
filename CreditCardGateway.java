@@ -1,27 +1,33 @@
 import java.util.Map;
 
-public class CreditCardGateway implements PaymentGateway {
-    private String endpoint;
+    public class CreditCardPaymentGateway implements PaymentGateway {
+    private Map<String, String> config;
 
-    public CreditCardGateway(String endpoint) {
-        this.endpoint = endpoint;
+    public CreditCardPaymentGateway(Map<String, String> config) {
+        this.config = config;
+    }
+
+
+    @Override
+   public Map<String, String> processPayment(double amount, String currency, Map<String, String> customerInfo, Map<String, String> paymentDetails) {
+    
+        System.out.println("Connecting to Credit Card API at " + this.config.get("credit_card_endpoint"));
+        String transactionId = "CC" + new Date().getTime();
+        System.out.println("Processing credit card payment for " + customerInfo.get("name"));
+        return Map.of("status", "success", "transaction_id", transactionId);
+    }
+        
+    @Override
+    public Map<String, String> refundPayment(String transactionId) {
+        
+        System.out.println("Refunding credit card payment with transaction ID " + transactionId);
+        return Map.of("status", "success", "message", "Refund successful");
     }
 
     @Override
-    public Map<String, String> processPayment(Payment payment) {
-        System.out.println("Processing credit card via endpoint: " + endpoint);
-        return payment.processPayment();
-    }
-
-    @Override
-    public boolean refundPayment(String transactionId) {
-        System.out.println("Refunding credit card transaction: " + transactionId);
-        return true;
-    }
-
-    @Override
-    public String getTransactionStatus(String transactionId) {
-        System.out.println("Checking status for credit card: " + transactionId);
-        return "pending";
+    public Map<String, String> getTransactionStatus(String transactionId) {
+        
+        System.out.println("Getting transaction status for transaction ID " + transactionId);
+        return Map.of("status", "success", "transaction_id", transactionId, "status_message", "Payment successful");
     }
 }
