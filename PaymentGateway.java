@@ -8,7 +8,7 @@ public interface PaymentGateway {
                                       Map<String, String> paymentDetails);
     
  
-    Map<String, String> refundPayment(String transactionId, double amount, String reason);
+    Map<String, String> refundPayment(String transactionId);
     
   
     Map<String, String> getTransactionStatus(String transactionId);
