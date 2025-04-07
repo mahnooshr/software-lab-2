@@ -20,20 +20,20 @@ public class PayPalGateway implements PaymentGateway{
         String paymentType = paymentDetails.get("payment_type");
         String transactionId = paymentType + new Date().getTime();
         
-        System.out.println("Processing digital wallet payment for " + this.customerInfo.get("name"));
+        System.out.println("Processing payment for " + customerInfo.get("name"));
         return transactionId;
     }
     
     public void refundPayment(Map<String, String> paymentDetails, String transactionId){
         String paymentEndpoint = paymentDetails.get("payment_endpoint");
         String baseUrl = this.config.get("paypal_refund_endpoint");
-        System.out.println("Refund payment with transaction id" + transaction_id + " to PayPalGateway at " + baseUrl + paymentEndpoint);
+        System.out.println("Refund payment with transaction id" + transactionId + " to PayPalGateway at " + baseUrl + paymentEndpoint);
     }
     
-    public Map<String, String> getTransactionStatus(String transactionId){
+    public Map<String, String> getTransactionStatus(Map<String, String> paymentDetails, String transactionId){
         String paymentEndpoint = paymentDetails.get("payment_endpoint");
         String baseUrl = this.config.get("paypal_get_status_endpoint");
-        System.out.println("Get status of payment with transaction id" + transaction_id + " to PayPalGateway at " + baseUrl + paymentEndpoint);
+        System.out.println("Get status of payment with transaction id" + transactionId + " to PayPalGateway at " + baseUrl + paymentEndpoint);
         return Map.of("status", "success", "transaction_id", transactionId);
     }
 }

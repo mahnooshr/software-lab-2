@@ -11,5 +11,5 @@ public interface PaymentGateway {
     void refundPayment(Map<String, String> paymentDetails, String transactionId);
     
   
-    Map<String, String> getTransactionStatus(String transactionId);
+    Map<String, String> getTransactionStatus(Map<String, String> paymentDetails, String transactionId);
 }

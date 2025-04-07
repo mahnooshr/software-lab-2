@@ -17,5 +17,16 @@ public abstract class Payment {
 
     public abstract boolean validatePayment();
 
-    public abstract Map<String, String> processPayment();
+    public Map<String, String> processPayment(PaymentGateway gateway) {
+        String transactionId = gateway.processPayment(amount, currency, customerInfo, paymentDetails);
+
+        Map<String, String> status = gateway.getTransactionStatus(paymentDetails, transactionId);
+
+        if (status.get("status").equals("success"))
+            return status;
+
+        gateway.refundPayment(paymentDetails, transactionId);
+
+        return gateway.getTransactionStatus(paymentDetails, transactionId);
+    }
 }
