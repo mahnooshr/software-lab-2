@@ -29,4 +29,20 @@ public abstract class Payment {
 
         return gateway.getTransactionStatus(paymentDetails, transactionId);
     }
+
+    public double getAmount() {
+        return amount;
+    }
+    
+    public String getCurrency() {
+        return currency;
+    }
+    
+    public Map<String, String> getCustomerInfo() {
+        return customerInfo;
+    }
+    
+    public Map<String, String> getPaymentDetails() {
+        return paymentDetails;
+    }
 }
