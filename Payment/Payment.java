@@ -1,5 +1,7 @@
 import java.util.Map;
 
+import GatewayClasses.PaymentGateway;
+
 public abstract class Payment {
     protected double amount;
     protected String currency;

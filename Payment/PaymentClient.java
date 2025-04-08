@@ -1,6 +1,10 @@
 import java.util.HashMap;
 import java.util.Map;
 
+import GatewayClasses.PayPalGateway;
+import GatewayClasses.PaymentGateway;
+import GatewayClasses.StripeGateway;
+
 public class PaymentClient {
     public static void main(String[] args) {
       
