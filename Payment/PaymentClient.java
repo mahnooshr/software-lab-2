@@ -4,6 +4,7 @@ import java.util.Map;
 import GatewayClasses.PayPalGateway;
 import GatewayClasses.PaymentGateway;
 import GatewayClasses.StripeGateway;
+import GatewayProviders.GatewayProvider;
 
 public class PaymentClient {
     public static void main(String[] args) {
@@ -12,22 +13,9 @@ public class PaymentClient {
         customerInfo.put("name", "John Doe");
         customerInfo.put("email", "john.doe@example.com");
         
+        PaymentGateway paypalGateway = GatewayProvider.Instance.getGateway("paypal");
+        PaymentGateway stripeGateway = GatewayProvider.Instance.getGateway("stripe");
         
-        Map<String, String> paypalConfig = new HashMap<>();
-        paypalConfig.put("paypal_process_endpoint", "https://api.paypal.com/v1/payments/");
-        paypalConfig.put("paypal_refund_endpoint", "https://api.paypal.com/v1/refunds/");
-        paypalConfig.put("paypal_get_status_endpoint", "https://api.paypal.com/v1/status/");
-        
-        Map<String, String> stripeConfig = new HashMap<>();
-        stripeConfig.put("stripe_process_endpoint", "https://api.stripe.com/v1/charges/");
-        stripeConfig.put("stripe_refund_endpoint", "https://api.stripe.com/v1/refunds/");
-        stripeConfig.put("stripe_get_status_endpoint", "https://api.stripe.com/v1/status/");
-        
-        
-        PaymentGateway paypalGateway = new PayPalGateway(paypalConfig);
-        PaymentGateway stripeGateway = new StripeGateway(stripeConfig);
-        
-       
         Map<String, String> creditCardDetails = new HashMap<>();
         creditCardDetails.put("card_number", "4111111111111111");
         creditCardDetails.put("expiry", "12/25");
